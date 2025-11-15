@@ -20,8 +20,6 @@ services:
       MYSQL_USER: shinobi
       MYSQL_PASSWORD: shinobi
       MYSQL_DATABASE: ccio
-    ports:
-      - "8080:8080"
     volumes:
       - shinobi_config:/config
       - shinobi_custom:/custom
