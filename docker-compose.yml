@@ -1,37 +1,34 @@
-version: "3.8"
-
 services:
   mariadb:
-    image: mariadb:10.7
-    container_name: shinobi-mariadb
-    environment:
-      MYSQL_ROOT_PASSWORD: strongrootpassword
-      MYSQL_DATABASE: cctv
-      MYSQL_USER: shinobi
-      MYSQL_PASSWORD: strongpassword
-    volumes:
-      - db_data:/var/lib/mysql
+    image: mariadb:10.5
     restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: shinobi
+      MYSQL_DATABASE: ccio
+      MYSQL_USER: shinobi
+      MYSQL_PASSWORD: shinobi
+    volumes:
+      - mariadb_data:/var/lib/mysql
 
   shinobi:
     image: shinobisystems/shinobi:latest
-    container_name: shinobi
     depends_on:
       - mariadb
+    restart: always
     environment:
       MYSQL_HOST: mariadb
       MYSQL_USER: shinobi
-      MYSQL_PASSWORD: strongpassword
-      MYSQL_DATABASE: cctv
-      TZ: America/Merida
+      MYSQL_PASSWORD: shinobi
+      MYSQL_DATABASE: ccio
     ports:
       - "8080:8080"
     volumes:
       - shinobi_config:/config
-      - shinobi_data:/home/Shinobi/videos
-    restart: always
+      - shinobi_custom:/custom
+      - shinobi_videos:/home/Shinobi/videos
 
 volumes:
-  db_data:
+  mariadb_data:
   shinobi_config:
-  shinobi_data:
+  shinobi_custom:
+  shinobi_videos:
