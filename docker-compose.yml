@@ -11,7 +11,7 @@ services:
       - mariadb_data:/var/lib/mysql
 
   shinobi:
-    image: shinobisystems/shinobi:stable
+    image: shinobisystems/shinobi:latest
     depends_on:
       - mariadb
     restart: always
